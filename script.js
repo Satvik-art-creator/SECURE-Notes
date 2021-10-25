@@ -7,11 +7,12 @@ const addBtn = select("#add");
 
 let clckCount = 0;
 
+const ourNotes = [];
+localStorage.setItem("Our Notes", JSON.stringify(ourNotes));
+
 //updating the local strogae data
 const updateLSData = () => {
   const notes = document.querySelectorAll("textarea");
-  
-  const ourNotes = [];
 
   notes.forEach((note) => ourNotes.push(note.value));
 
@@ -98,11 +99,11 @@ const newNote = (text = "") => {
 };
 
 //converting the string back to array
-const ourNotes = JSON.parse(localStorage.getItem("Our Notes"));
+const ourEachNote = JSON.parse(localStorage.getItem("Our Notes"));
 
 //creating new div for each note
-if (ourNotes) {
-  ourNotes.forEach((note) => newNote(note));
+if (ourEachNote) {
+  ourEachNote.forEach((note) => newNote(note));
 }
 
 const encrypt = document.createElement("div");
@@ -111,19 +112,19 @@ encrypt.classList.add("encryption");
 const htmlData = `
 <div class="security">
       <h2>${
-        ourNotes.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
+        ourEachNote.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
       }</h2>
 
       <div class="inputs">
           <input type="password" id="password" class="${
-            ourNotes.length >= 1 ? "hidden" : ""
+            ourEachNote.length >= 1 ? "hidden" : ""
           }" placeholder="Password" required autocomplete="off">
           <input type="text" id="cpassword" class="${
-            ourNotes.length >= 1 ? "hidden" : ""
+            ourEachNote.length >= 1 ? "hidden" : ""
           }"  placeholder="Confirm Password" required autocomplete="off">
 
           <input type="password" id="yourPass" class="${
-            ourNotes.length >= 1 ? "" : "hidden"
+            ourEachNote.length >= 1 ? "" : "hidden"
           }" placeholder="Your Password" required autocomplete="off">
 
           <input type="submit" id="submit" style="display: block;" value="Submit">
@@ -173,7 +174,7 @@ const passSetupSystem = () => {
   }
 };
 
-if (ourNotes.length >= 1) {
+if (ourEachNote.length >= 1) {
   const urPass = selectPass("#yourPass");
 
   urPass.value = localStorage.getItem("Password");
