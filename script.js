@@ -7,17 +7,16 @@ const addBtn = select("#add");
 
 let clckCount = 0;
 
-const ourNotes = [];
-localStorage.setItem("Our Notes", JSON.stringify(ourNotes));
-
 //updating the local strogae data
-const updateLSData = () => {
+(const updateLSData = () => {
   const notes = document.querySelectorAll("textarea");
+  
+  const ourNotes = [];
 
   notes.forEach((note) => ourNotes.push(note.value));
 
   localStorage.setItem("Our Notes", JSON.stringify(ourNotes));
-};
+});
 
 const newNote = (text = "") => {
   const note = document.createElement("div");
