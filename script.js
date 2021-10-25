@@ -109,11 +109,11 @@ const newNote = (text = "") => {
 };
 
 //converting the string back to array
-const ourEachNote = JSON.parse(localStorage.getItem("Our Notes"));
+const ourNotes = JSON.parse(localStorage.getItem("Our Notes"));
 
 //creating new div for each note
-if (ourEachNote) {
-  ourEachNote.forEach((note) => newNote(note));
+if (ourNotes) {
+  ourNotes.forEach((note) => newNote(note));
 }
 
 const encrypt = document.createElement("div");
@@ -122,19 +122,19 @@ encrypt.classList.add("encryption");
 const htmlData = `
 <div class="security">
       <h2>${
-        ourEachNote.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
+        ourNotes.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
       }</h2>
 
       <div class="inputs">
           <input type="password" id="password" class="${
-            ourEachNote.length >= 1 ? "hidden" : ""
+            ourNotes.length >= 1 ? "hidden" : ""
           }" placeholder="Password" required autocomplete="off">
           <input type="text" id="cpassword" class="${
-            ourEachNote.length >= 1 ? "hidden" : ""
+            ourNotes.length >= 1 ? "hidden" : ""
           }"  placeholder="Confirm Password" required autocomplete="off">
 
           <input type="password" id="yourPass" class="${
-            ourEachNote.length >= 1 ? "" : "hidden"
+            ourNotes.length >= 1 ? "" : "hidden"
           }" placeholder="Your Password" required autocomplete="off">
 
           <input type="submit" id="submit" style="display: block;" value="Submit">
@@ -184,7 +184,7 @@ const passSetupSystem = () => {
   }
 };
 
-if (ourEachNote.length >= 1) {
+if (ourNotes.length >= 1) {
   const urPass = selectPass("#yourPass");
 
   urPass.value = localStorage.getItem("Password");
