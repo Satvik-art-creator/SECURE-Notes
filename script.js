@@ -8,7 +8,7 @@ const addBtn = select("#add");
 let clckCount = 0;
 
 //updating the local strogae data
-(const updateLSData = () => {
+const updateLSData = () => ({
   const notes = document.querySelectorAll("textarea");
   
   const ourNotes = [];
