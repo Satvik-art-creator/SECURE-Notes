@@ -6,7 +6,7 @@ DIV.style.filter = "blur(8px)";
 const addBtn = select("#add");
 
 let clckCount = 0;
-// let chck = 0;
+let chck = 0;
 
 //updating the local strogae data
 const updateLSData = () => {
@@ -19,16 +19,14 @@ const updateLSData = () => {
   localStorage.setItem("Our Notes", JSON.stringify(ourNotes));
 };
 
-updateLSData();
-
-// if(chck == 0){
-//   updateLSData();
-// } else{
-//   chck = 1;
-// }
+if(chck == 0){
+  updateLSData();
+} else{
+  chck = 1;
+}
 
 const newNote = (text = "") => {
-//   chck=1;
+  chck=1;
   
   const note = document.createElement("div");
   note.classList.add("note");
