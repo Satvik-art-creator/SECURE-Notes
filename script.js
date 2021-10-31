@@ -6,12 +6,10 @@ DIV.style.filter = "blur(8px)";
 const addBtn = select("#add");
 
 let clckCount = 0;
-let chck = 0;
 
 //updating the local strogae data
 const updateLSData = () => {
   const notes = document.querySelectorAll("textarea");
-  
   const ourNotes = [];
 
   notes.forEach((note) => ourNotes.push(note.value));
@@ -19,15 +17,7 @@ const updateLSData = () => {
   localStorage.setItem("Our Notes", JSON.stringify(ourNotes));
 };
 
-if(chck == 0){
-  updateLSData();
-} else{
-  chck = 1;
-}
-
 const newNote = (text = "") => {
-  chck=1;
-  
   const note = document.createElement("div");
   note.classList.add("note");
 
@@ -117,22 +107,24 @@ if (ourNotes) {
 const encrypt = document.createElement("div");
 encrypt.classList.add("encryption");
 
+const countNotes = ourNotes;
+
 const htmlData = `
 <div class="security">
       <h2>${
-        ourNotes.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
+        countNotes.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
       }</h2>
 
       <div class="inputs">
           <input type="password" id="password" class="${
-            ourNotes.length >= 1 ? "hidden" : ""
+            countNotes.length >= 1 ? "hidden" : ""
           }" placeholder="Password" required autocomplete="off">
           <input type="text" id="cpassword" class="${
-            ourNotes.length >= 1 ? "hidden" : ""
+            countNotes.length >= 1 ? "hidden" : ""
           }"  placeholder="Confirm Password" required autocomplete="off">
 
           <input type="password" id="yourPass" class="${
-            ourNotes.length >= 1 ? "" : "hidden"
+            countNotes.length >= 1 ? "" : "hidden"
           }" placeholder="Your Password" required autocomplete="off">
 
           <input type="submit" id="submit" style="display: block;" value="Submit">
@@ -182,7 +174,7 @@ const passSetupSystem = () => {
   }
 };
 
-if (ourNotes.length >= 1) {
+if (countNotes.length >= 1) {
   const urPass = selectPass("#yourPass");
 
   urPass.value = localStorage.getItem("Password");
