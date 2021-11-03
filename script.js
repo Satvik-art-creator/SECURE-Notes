@@ -107,24 +107,24 @@ if (ourNotes) {
 const encrypt = document.createElement("div");
 encrypt.classList.add("encryption");
 
-const countNotes = ourNotes;
+let countNotes = ourNotes ? ourNotes["length"] : 0;
 
 const htmlData = `
 <div class="security">
       <h2>${
-        countNotes.length >= 1 ? "Enter your Password" : "Encrypt your Notes"
+        countNotes >= 1 ? "Enter your Password" : "Encrypt your Notes"
       }</h2>
 
       <div class="inputs">
           <input type="password" id="password" class="${
-            countNotes.length >= 1 ? "hidden" : ""
+            countNotes >= 1 ? "hidden" : ""
           }" placeholder="Password" required autocomplete="off">
           <input type="text" id="cpassword" class="${
-            countNotes.length >= 1 ? "hidden" : ""
+            countNotes >= 1 ? "hidden" : ""
           }"  placeholder="Confirm Password" required autocomplete="off">
 
           <input type="password" id="yourPass" class="${
-            countNotes.length >= 1 ? "" : "hidden"
+            countNotes >= 1 ? "" : "hidden"
           }" placeholder="Your Password" required autocomplete="off">
 
           <input type="submit" id="submit" style="display: block;" value="Submit">
@@ -137,10 +137,9 @@ document.body.appendChild(encrypt);
 
 const selectPass = (selector) => encrypt.querySelector(selector);
 
+const pass = selectPass("#password");
+const cpass = selectPass("#cpassword");
 const passSetupSystem = () => {
-  const pass = selectPass("#password");
-  const cpass = selectPass("#cpassword");
-
   if (pass.value == "") {
     swal({
       title: "Verification",
@@ -165,7 +164,7 @@ const passSetupSystem = () => {
 
     clckCount++;
 
-    localStorage.setItem("Password", pass.value);
+    localStorage.setItem("Password", "kajdsfahgoihagsjhasfdjsfjsf" + pass.value + "sdfsfsdfsadjfhjkashfjhisdex");
 
     encrypt.remove();
     DIV.style.filter = "blur(0px)";
@@ -174,10 +173,12 @@ const passSetupSystem = () => {
   }
 };
 
-if (countNotes.length >= 1) {
+if (countNotes >= 1) {
   const urPass = selectPass("#yourPass");
 
-  urPass.value = localStorage.getItem("Password");
+  let encryptPass = localStorage.getItem("Password").slice(27,-27);
+
+  urPass.value = encryptPass;
 
   submit.addEventListener("click", () => {
     if(urPass.value == ""){
@@ -187,13 +188,15 @@ if (countNotes.length >= 1) {
         icon: "info",
         button: "Ohk!",
       });
-    } else if (urPass.value != localStorage.getItem("Password")) {
+    } else if (urPass.value != encryptPass) {
       swal({
         title: "Verification",
         text: "Wrong Password!",
         icon: "error",
         button: "Ohk!",
       });
+
+      urPass.value = "";
     } else {
       clckCount++;
 
