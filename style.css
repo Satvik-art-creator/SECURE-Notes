@@ -194,6 +194,7 @@ header p{
     padding-left: 20px;
     color: #686060;
     margin-top: 4rem;
+    text-align: left;
 }
 
 .note textarea{
