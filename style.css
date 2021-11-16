@@ -191,6 +191,7 @@ header p{
 }
 
 .note .main{
+    overflow-wrap: anywhere;
     padding-left: 20px;
     color: #686060;
     margin-top: 4rem;
