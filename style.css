@@ -312,13 +312,17 @@ footer p{
     }
 }
 
-@media only screen and (max-width: 420px){
+@media only screen and (max-width: 425px){
     .encryption{
         width: 320px;
     }
 
     .encryption .inputs input{
         width: 150px;
+    }
+	
+    .note textarea{
+    	height: 140px;
     }
 }
 
